@@ -1,0 +1,21 @@
+# Python cache and environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data (Ignore raw/processed data to avoid GitHub size limits, except small test files)
+# data/raw/*
+# data/processed/*
+# !data/raw/.gitkeep
+# !data/processed/.gitkeep
+
+# OS generated files
+.DS_Store
+Thumbs.db
