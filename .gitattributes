@@ -1,0 +1,4 @@
+# Mark specific file types as vendored to exclude them from GitHub language statistics
+*.ipynb linguist-vendored
+*.tex linguist-vendored
+*.html linguist-vendored
