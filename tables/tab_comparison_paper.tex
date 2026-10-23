@@ -1,0 +1,26 @@
+% Table 2 Fragment: Comparison between Published Paper and Empirical Replicated Dataset
+% Use: \input{tables/tab_comparison_paper.tex} in your report
+\begin{table}[htbp]
+\centering
+\small
+\caption{Comparison of summary statistics between published values in Szczepocki (2023, Table 1) and our replicated dataset ($T = 1{,}258$).}
+\label{tab:comparison}
+\vspace{0.5em}
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+\textbf{Asset} & \textbf{Source} & \textbf{Mean} & \textbf{St. Dev.} & \textbf{Skew.} & \textbf{Kurt.} & \textbf{Min} & \textbf{Q1} & \textbf{Med.} & \textbf{Q3} & \textbf{Max} \\
+\midrule
+\textbf{SPX}      & Paper (Table 1) & 0.035 & 1.374 & -0.770 & 16.220 & -12.765 & -0.533 & 0.077 & 0.712 &  8.968 \\
+                  & Our Dataset     & 0.035 & 1.374 & -0.770 & 16.221 & -12.765 & -0.533 & 0.077 & 0.712 &  8.968 \\
+\addlinespace
+\textbf{Gold}     & Paper (Table 1) & 0.033 & 0.926 & -0.414 &  6.524 &  -5.868 & -0.432 & 0.070 & 0.542 &  4.605 \\
+                  & Our Dataset     & 0.033 & 0.926 & -0.413 &  6.528 &  -5.868 & -0.432 & 0.070 & 0.541 &  4.605 \\
+\addlinespace
+\textbf{Bitcoin}  & Paper (Table 1) & 0.097 & 4.305 & -0.260 &  8.460 & -32.360 & -1.758 & 0.001 & 2.059 & 23.230 \\
+                  & Our Dataset     & 0.102 & 4.302 & -0.262 &  8.485 & -32.360 & -1.757 & 0.000 & 2.059 & 23.230 \\
+\addlinespace
+\textbf{Ethereum} & Paper (Table 1) & 0.087 & 5.715 & -0.442 &  8.594 & -42.855 & -2.408 & 0.113 & 2.887 & 31.419 \\
+                  & Our Dataset     & 0.092 & 5.693 & -0.445 &  8.553 & -42.446 & -2.418 & 0.124 & 2.886 & 31.151 \\
+\bottomrule
+\end{tabular}
+\end{table}

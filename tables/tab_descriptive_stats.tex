@@ -1,0 +1,18 @@
+% Table 1 Fragment: Descriptive Statistics of Empirical Returns (T = 1258)
+% Use: \input{tables/tab_descriptive_stats.tex} in your report
+\begin{table}[htbp]
+\centering
+\caption{Summary statistics of daily percentage logarithmic returns ($100 \times \ln(P_{i,t}/P_{i,t-1})$) for the four analysed assets in the period from 4 June 2018 to 4 June 2023 ($T = 1{,}258$ observations).}
+\label{tab:descriptive_statistics}
+\vspace{0.5em}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+\textbf{Asset} & \textbf{Mean} & \textbf{St. Dev.} & \textbf{Skewness} & \textbf{Kurtosis} & \textbf{Min} & \textbf{Q1} & \textbf{Median} & \textbf{Q3} & \textbf{Max} \\
+\midrule
+SPX      & 0.035 & 1.374 & -0.770 & 16.221 & -12.765 & -0.533 & 0.077 & 0.712 &  8.968 \\
+Gold     & 0.033 & 0.926 & -0.413 &  6.528 &  -5.868 & -0.432 & 0.070 & 0.541 &  4.605 \\
+Bitcoin  & 0.102 & 4.302 & -0.262 &  8.485 & -32.360 & -1.757 & 0.000 & 2.059 & 23.230 \\
+Ethereum & 0.092 & 5.693 & -0.445 &  8.553 & -42.446 & -2.418 & 0.124 & 2.886 & 31.151 \\
+\bottomrule
+\end{tabular}
+\end{table}
