@@ -45,10 +45,10 @@ This repository contains the codebase for our group project on **Multivariate St
 
 ## ChMSV Mathematical Specification (`src/base_model.py`)
 
-For a $p$-dimensional vector of daily percentage log-returns $\mathbf{y}_t = (y_{1,t}, \dots, y_{p,t})'$ (Equations 1–9 of Szczepocki, 2023):
+For a p-dimensional vector of daily percentage log-returns y_t = (y_{1,t}, ..., y_{p,t})' (Equations 1–9 of Szczepocki, 2023):
 
 $$
-\mathbf{y}_t = \mathbf{L}_t \mathbf{V}_t^{1/2} \mathbf{e}_t, \quad \mathbf{e}_t \sim \text{iid } \mathcal{N}_p(0, \mathbf{I}_p)
+y_t = L_t V_t^{1/2} e_t, \quad e_t \sim \text{iid } \mathcal{N}_p(0, I_p)
 $$
 
 The latent states follow independent Gaussian AR(1) processes:
@@ -61,27 +61,27 @@ $$
 q_{ij,t} = \mu_{ij} + \phi_{ij} (q_{ij,t-1} - \mu_{ij}) + \upsilon_{ij,t}, \quad \upsilon_{ij,t} \sim \text{iid } \mathcal{N}(0, \sigma_{\psi_{ij}}^2), \quad 1 \le j < i \le p
 $$
 
-### Latent State Vector ($d_x = p(p+1)/2$)
+### Latent State Vector (d_x = p(p + 1) / 2)
 
-* **4-Asset Model** (`ChMSV` / `ChMSV4Asset`, $p=4$, $d_x=10$, 30 parameters):
-$$
-X_t = (h_{1,t}, h_{2,t}, h_{3,t}, h_{4,t}, \, q_{21,t}, q_{31,t}, q_{41,t}, q_{32,t}, q_{42,t}, q_{43,t})'
-$$
+* **4-Asset Model** (`ChMSV` / `ChMSV4Asset`, p = 4, d_x = 10 hidden states, 30 parameters):
+  ```text
+  X_t = (h_{1,t}, h_{2,t}, h_{3,t}, h_{4,t}, q_{21,t}, q_{31,t}, q_{41,t}, q_{32,t}, q_{42,t}, q_{43,t})'
+  ```
 
-* **Fast 2-Asset Model** (`ChMSV2Asset`, $p=2$, $d_x=3$, 9 parameters — SPX & Gold):
-$$
-X_t = (h_{1,t}, h_{2,t}, \, q_{21,t})'
-$$
+* **Fast 2-Asset Model** (`ChMSV2Asset`, p = 2, d_x = 3 hidden states, 9 parameters — SPX & Gold):
+  ```text
+  X_t = (h_{1,t}, h_{2,t}, q_{21,t})'
+  ```
 
 ### State-to-Correlation Transformations (Equations 4, 5, 6, 7)
 
-The conditional covariance matrix $\mathbf{\Sigma}_t = \mathbf{L}_t \mathbf{V}_t \mathbf{L}_t'$ has diagonal elements:
+The conditional covariance matrix Sigma_t = L_t V_t L_t' has diagonal elements (q_{ii,t} = 1):
 
 $$
-\Sigma_{t,ii} = \sum_{k=1}^i q_{ik,t}^2 \exp(h_{k,t}), \qquad q_{ii,t} = 1
+\Sigma_{t,ii} = \sum_{k=1}^i q_{ik,t}^2 \exp(h_{k,t})
 $$
 
-and off-diagonal elements ($i > j$):
+and off-diagonal elements (i > j):
 
 $$
 \Sigma_{t,ij} = \sum_{k=1}^j q_{ik,t} q_{jk,t} \exp(h_{k,t})
@@ -145,17 +145,17 @@ corr_pairs = out["corr_pairs"]  # shape: (1258, 6) -> (1,2), (1,3), (1,4), (2,3)
 
 ## Real Dataset Overview
 
-The empirical dataset covers daily observations from **4 June 2018 to 4 June 2023** across four assets ($T = 1258$ common daily return observations):
+The empirical dataset covers daily observations from **4 June 2018 to 4 June 2023** across four assets (T = 1258 common daily return observations):
 * **SPX**: Standard & Poor's 500 index
 * **Gold**: Spot gold (XAU/USD)
 * **Bitcoin**: Spot Bitcoin (BTC/USD)
 * **Ethereum**: Spot Ethereum (ETH/USD)
 
-Following the paper's methodology, only common trading days present across all four series are included ($1{,}259$ price observations yielding $T = 1{,}258$ daily percentage log-returns, $y_{i,t} = 100 \times \ln(P_{i,t} / P_{i,t-1})$).
+Following the paper's methodology, only common trading days present across all four series are included (1,259 price observations yielding T = 1,258 daily percentage log-returns, y_{i,t} = 100 * ln(P_{i,t} / P_{i,t-1})).
 
 Cleaned datasets and raw price series are stored in:
-* `data/processed/real_4assets_log_returns.csv` (4-asset percentage log-returns, $T = 1258$)
-* `data/processed/real_2assets_log_returns.csv` (2-asset fast subset: SPX and Gold, $T = 1258$)
+* `data/processed/real_4assets_log_returns.csv` (4-asset percentage log-returns, T = 1258)
+* `data/processed/real_2assets_log_returns.csv` (2-asset fast subset: SPX and Gold, T = 1258)
 * `data/raw/four_assets_raw_prices.csv` (aligned daily closing prices)
 
 Detailed LaTeX summary statistics and replication tables are available in the [`tables/`](tables/) directory (`tables/table1_summary_statistics.tex` and `tables/table1_summary_statistics.pdf`).
@@ -172,5 +172,5 @@ Detailed LaTeX summary statistics and replication tables are available in the [`
 | :--- | :--- | :--- |
 | **1. Data & Base ChMSV Model Setup** (Gabriel) | `src/base_model.py`, `data/`, `notebooks/`, `tables/` | 4-asset & 2-asset `ChMSV` classes in `particles`, state-to-correlation helpers (Eqs. 4–7), cleaned real 4-asset dataset (2018–2023), 2-asset & 4-asset simulated datasets, LaTeX tables |
 | **2. Task 1 – Bootstrap PF & Dynamic Correlations** | `src/filtering.py` | Bootstrap PF pipeline extracting volatilities, dynamic correlations & log-likelihoods; 10-run variability benchmark on simulated data; reproduction of Figs. 2, 3, 4 on real data |
-| **3. Task 2 & 3 – Iterated Filtering (IF2)** | `src/estimation.py` / `src/smoothing.py` | IF2 algorithm (Ionides et al., 2015) with random-walk parameter perturbations & geometric cooling ($\alpha = 0.5$); 10+ run ME/RMSE recovery (Table 3) & real 4-asset estimation (Table 2) |
-| **4. Task 4 – Competing Estimator (PMCMC / $\text{SMC}^2$)** | `src/estimation.py` | Bayesian parameter estimation via `particles.mcmc` (PMMH / Particle Gibbs) or `particles.smc_samplers` ($\text{SMC}^2$); multi-chain variability & head-to-head comparison vs. IF2 |
+| **3. Task 2 & 3 – Iterated Filtering (IF2)** | `src/estimation.py` / `src/smoothing.py` | IF2 algorithm (Ionides et al., 2015) with random-walk parameter perturbations & geometric cooling (alpha = 0.5); 10+ run ME/RMSE recovery (Table 3) & real 4-asset estimation (Table 2) |
+| **4. Task 4 – Competing Estimator (PMCMC / SMC^2)** | `src/estimation.py` | Bayesian parameter estimation via `particles.mcmc` (PMMH / Particle Gibbs) or `particles.smc_samplers` (SMC^2); multi-chain variability & head-to-head comparison vs. IF2 |
