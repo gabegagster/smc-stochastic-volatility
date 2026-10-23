@@ -1,0 +1,40 @@
+{
+  "p": 2,
+  "dx": 3,
+  "num_params": 9,
+  "T": 500,
+  "seed": 42,
+  "init_dist": "dirac",
+  "asset_names": [
+    "SPX",
+    "Gold"
+  ],
+  "state_names": [
+    "h_1",
+    "h_2",
+    "q_21"
+  ],
+  "offdiag_pairs_row_col": [
+    [
+      2,
+      1
+    ]
+  ],
+  "offdiag_pairs_table2": [
+    [
+      1,
+      2
+    ]
+  ],
+  "true_params": {
+    "mu_1": 0.0012,
+    "phi_1": 0.9549,
+    "sigma_1": 0.1357,
+    "mu_2": -0.1888,
+    "phi_2": 0.8545,
+    "sigma_2": 0.4811,
+    "mu_21": 0.0472,
+    "phi_21": 0.571,
+    "sigma_21": 0.0022
+  }
+}
