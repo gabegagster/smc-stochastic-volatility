@@ -45,9 +45,9 @@ from src.base_model import (
 def _format_save_path(save_path: Path) -> str:
     """Format a path relative to PROJECT_ROOT safely (works from root or notebooks/)."""
     try:
-        return str(save_path.resolve().relative_to(PROJECT_ROOT.resolve()))
+        return save_path.resolve().relative_to(PROJECT_ROOT.resolve()).as_posix()
     except ValueError:
-        return str(save_path)
+        return save_path.as_posix()
 
 
 # ---------------------------------------------------------------------------
@@ -251,8 +251,21 @@ def run_10run_variability_benchmark(
     std_ll = float(np.std(log_liks_arr, ddof=1)) if n_runs > 1 else 0.0
     se_ll = std_ll / np.sqrt(n_runs)
 
+    # pomp::logmeanexp-style log-likelihood aggregation and jackknife SE
+    m = float(np.max(log_liks_arr))
+    lme_ll = float(m + np.log(np.mean(np.exp(log_liks_arr - m))))
+    if n_runs > 1:
+        jk = np.array([
+            m + np.log(np.mean(np.exp(np.delete(log_liks_arr, i) - m)))
+            for i in range(n_runs)
+        ])
+        lme_se = float(np.sqrt(((n_runs - 1) / n_runs) * np.sum((jk - np.mean(jk)) ** 2)))
+    else:
+        lme_se = 0.0
+
     print("-" * 65)
     print(f"   SMC Log-Likelihood Mean: {mean_ll:.4f} (Std: {std_ll:.4f}, SE: {se_ll:.4f})")
+    print(f"   Log-Mean-Exp (pomp): {lme_ll:.4f} (Jackknife SE: {lme_se:.4f})")
     if p == 4:
         print(f"   Paper Table 2 Value   : {TABLE2_LOG_LIKELIHOOD:.4f} (SE: {TABLE2_LOG_LIKELIHOOD_SE:.4f})")
         diff = abs(mean_ll - TABLE2_LOG_LIKELIHOOD)
@@ -264,6 +277,8 @@ def run_10run_variability_benchmark(
         "mean_log_lik": mean_ll,
         "std_log_lik": std_ll,
         "se_log_lik": se_ll,
+        "logmeanexp_log_lik": lme_ll,
+        "logmeanexp_se": lme_se,
         "mean_ess": float(np.mean(mean_ess_list)),
         "min_ess": float(np.mean(min_ess_list)),
         "n_runs": n_runs,
@@ -383,7 +398,12 @@ def plot_figure3_spx_correlations(
         ax.axhline(0.0, color="black", linestyle="--", lw=0.8, alpha=0.7)
         ax.set_ylabel(r"Correlation $\rho_t$", fontsize=9.5, fontweight="bold")
         ax.set_title(title, fontsize=10, fontweight="bold")
-        ax.set_ylim(-0.25, 0.85)
+        low_series = corr_q05[:, pair_idx] if corr_q05 is not None else corr_filtered[:, pair_idx]
+        high_series = corr_q95[:, pair_idx] if corr_q95 is not None else corr_filtered[:, pair_idx]
+        y_lo = float(np.min(low_series))
+        y_hi = float(np.max(high_series))
+        pad = max(0.02, 0.12 * (y_hi - y_lo))
+        ax.set_ylim(min(-0.02, y_lo - pad), y_hi + pad)
         ax.grid(True, alpha=0.25)
         ax.legend(loc="upper right", fontsize=8.5)
 
