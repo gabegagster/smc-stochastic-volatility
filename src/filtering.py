@@ -642,7 +642,7 @@ def plot_simulation_tracking_benchmark(
 def main() -> None:
     """Execute full Role 2 verification: synthetic test, real filtering, benchmarks, and plot generation."""
     print("=" * 78)
-    print("SMC ChMSV Project — Role 2: Bootstrap PF & Dynamic Correlations")
+    print("SMC ChMSV Project - Role 2: Bootstrap PF & Dynamic Correlations")
     print("=" * 78)
 
     # ---------------------------------------------------------

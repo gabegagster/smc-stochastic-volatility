@@ -68,7 +68,7 @@ $$
   X_t = (h_{1,t}, h_{2,t}, h_{3,t}, h_{4,t}, q_{21,t}, q_{31,t}, q_{41,t}, q_{32,t}, q_{42,t}, q_{43,t})'
   ```
 
-* **Fast 2-Asset Model** (`ChMSV2Asset`, p = 2, d_x = 3 hidden states, 9 parameters — SPX & Gold):
+* **Fast 2-Asset Model** (`ChMSV2Asset`, p = 2, d_x = 3 hidden states, 9 parameters: SPX & Gold):
   ```text
   X_t = (h_{1,t}, h_{2,t}, q_{21,t})'
   ```

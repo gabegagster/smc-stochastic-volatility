@@ -731,7 +731,7 @@ def prepare_real_4assets_dataset(
     - Daily logarithmic returns multiplied by 100: y_{i,t} = 100 * log(P_{i,t} / P_{i,t-1})
 
     Data source priority:
-    1. Stooq CSVs in `data/raw/stooq/` (the paper's source; see `STOOQ_SYMBOLS`) — rebuilds
+    1. Stooq CSVs in `data/raw/stooq/` (the paper's source; see `STOOQ_SYMBOLS`), rebuilding
        `raw_csv_path` from them.
     2. Existing `raw_csv_path` (currently built from Yahoo Finance: ^GSPC, GC=F futures,
        BTC-USD, ETH-USD). SPX matches Table 1 exactly; Gold/BTC/ETH differ slightly from the
@@ -1205,7 +1205,7 @@ def plot_simulated_datasets_overview(
 def main() -> None:
     """Execute Role 1 (Data & Base ChMSV Model Setup): datasets, transformations, and overview plots."""
     print("=" * 78)
-    print("SMC ChMSV Project — Role 1: Data & Base ChMSV Model Setup (Szczepocki, 2023)")
+    print("SMC ChMSV Project - Role 1: Data & Base ChMSV Model Setup (Szczepocki, 2023)")
     print("=" * 78)
 
     # 1. Prepare and verify real 4-asset dataset (4 June 2018 – 4 June 2023, T = 1258)

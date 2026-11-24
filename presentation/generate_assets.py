@@ -121,7 +121,7 @@ def generate_icons() -> None:
 </svg>"""
     cairosvg.svg2png(bytestring=svg_filter.encode("utf-8"), write_to=str(ASSETS_DIR / "icon_filter.png"))
 
-    # Icon 3: Iterated Filtering (IF2) — iterative cooling / swarm convergence
+    # Icon 3: Iterated Filtering (IF2): iterative cooling / swarm convergence
     svg_model = """<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
   <g fill="none" stroke="#002752" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
     <path d="M 58 64 H 40 V 214 H 58"/>
@@ -314,7 +314,7 @@ def generate_slide10_clt_chart(out_path: Path) -> None:
         std_emp,
         width=0.48,
         color="#002752",
-        label="Empirical Std(log L) — 10 runs",
+        label="Empirical Std(log L) (10 runs)",
         zorder=3,
     )
     ax.plot(

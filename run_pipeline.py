@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Data & Base ChMSV Model Setup Runner (`run_pipeline.py`) — Role 1 (Gabriel)
+Data & Base ChMSV Model Setup Runner (`run_pipeline.py`) - Role 1 (Gabriel)
 
 Executes Role 1 deliverables based on Szczepocki (2023):
 1. Cleans and loads the real 4-asset dataset (SPX, Gold, Bitcoin, Ethereum,
@@ -46,7 +46,7 @@ def main() -> None:
     t0 = time.perf_counter()
 
     print("=" * 78)
-    print("SMC ChMSV PROJECT — ROLE 1: DATA & BASE ChMSV MODEL SETUP (Szczepocki, 2023)")
+    print("SMC ChMSV PROJECT - ROLE 1: DATA & BASE ChMSV MODEL SETUP (Szczepocki, 2023)")
     print("=" * 78)
 
     # 1. Real 4-Asset & 2-Asset Datasets (June 4, 2018 – June 4, 2023)

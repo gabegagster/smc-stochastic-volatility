@@ -624,7 +624,7 @@ def build_slide_01_title(prs: Presentation) -> None:
         top=5.74,
         width=USABLE_W,
         height=0.32,
-        text="ENSAE Paris — Sequential Monte Carlo (particles)   |   Prof. Nicolas Chopin",
+        text="ENSAE Paris  |  Sequential Monte Carlo (particles)  |  Prof. Nicolas Chopin",
         font_size=12.5,
         color=TEXT_MUTED,
     )
@@ -774,7 +774,7 @@ def build_slide_04_architecture(prs: Presentation) -> None:
     add_header_footer(
         slide,
         "Project Scope & Architecture",
-        "Four Modular Phases in particles — Empirical Filtering & Parameter Inference",
+        "Four Modular Phases in particles: Empirical Filtering & Parameter Inference",
         4,
     )
 
@@ -944,8 +944,8 @@ def build_slide_05_datasets_profiling(prs: Presentation) -> None:
                 "Retains 1,259 aligned trading days across all 4 Stooq feeds (T = 1,258 returns).",
             ),
             (
-                "Dual Outputs:",
-                "Exports real_{4,2}assets_log_returns.csv and synthetic ground-truth CSVs.",
+                "Dual Datasets:",
+                "Prepares 4-asset and 2-asset empirical series alongside synthetic ground-truth benchmarks.",
             ),
         ],
         title_size=14.0,
@@ -1009,7 +1009,7 @@ def build_slide_06_fig1_reproduction(prs: Presentation) -> None:
         width=5.43,
         height=1.10,
         title="Cleaned Empirical Datasets Ready for Filtering",
-        subtitle="data/processed/real_4assets_log_returns.csv  |  real_2assets_log_returns.csv",
+        subtitle="4-Asset Empirical Series (T = 1,258 × 4)  |  2-Asset Subset (SPX & Gold)",
         dark=True,
     )
 
@@ -1078,7 +1078,7 @@ def build_slide_07_chmsv_model(prs: Presentation) -> None:
         top=cy + CARD_PAD_TOP,
         width=iw,
         height=CARD_TITLE_H,
-        text="ChMSV Architecture (src/base_model.py)",
+        text="ChMSV Architecture in particles",
         font_size=14.5,
         bold=True,
         color=NAVY,
@@ -1087,9 +1087,9 @@ def build_slide_07_chmsv_model(prs: Presentation) -> None:
     )
 
     steps = [
-        ("1. ChMSVInitDist (PX0)", "Dirac point-mass at unconditional mean μ (t = 0)"),
-        ("2. ChMSVTransDist (PX)", "Diagonal Gaussian AR(1) transitions across d_{x} states"),
-        ("3. ChMSVObsDist (PY)", "Emit y_{t} | X_{t} ~ N_{p}(0, L_{t}V_{t}L_{t}^{T}) via Cholesky solve"),
+        ("1. Initial Distribution (PX0)", "Dirac point-mass at unconditional mean μ (t = 0)"),
+        ("2. State Transition Kernel (PX)", "Diagonal Gaussian AR(1) transitions across d_{x} states"),
+        ("3. Observation Density (PY)", "Emit y_{t} | X_{t} ~ N_{p}(0, L_{t}V_{t}L_{t}^{T}) via Cholesky solve"),
     ]
     y_curr = cy + CARD_PAD_TOP + CARD_TITLE_H + CARD_TITLE_GAP
     for st_title, st_sub in steps:
@@ -1116,7 +1116,7 @@ def build_slide_07_chmsv_model(prs: Presentation) -> None:
         width=iw,
         height=(cy + ch - CARD_PAD_BOTTOM) - y_curr,
         title="4. State-to-Finance Transforms (Eqs. 4–7)",
-        subtitle="states_to_covariance()  →  stdev & dynamic corr_pairs",
+        subtitle="Reconstruct Σ_{t}  →  conditional stdev & dynamic correlations",
         dark=True,
     )
 
@@ -1178,7 +1178,7 @@ def build_slide_08_simulated_benchmarks(prs: Presentation) -> None:
         items=[
             (
                 "Exact Ground Truth:",
-                "Stores latent x_true, stdev_true, and corr_true to evaluate filtering accuracy.",
+                "Retains exact latent states, volatilities, and correlations to score filtering RMSE.",
             ),
             (
                 "Fast Prototyping:",
@@ -1230,7 +1230,7 @@ def build_slide_09_bpf_sim_tracking(prs: Presentation) -> None:
         top=cy + CARD_PAD_TOP,
         width=iw,
         height=CARD_TITLE_H,
-        text="Feynman–Kac Setup (src/filtering.py)",
+        text="Feynman–Kac Setup in particles",
         font_size=14.0,
         bold=True,
         color=NAVY,
@@ -1339,9 +1339,9 @@ def build_slide_10_sensitivity_table2(prs: Presentation) -> None:
     t2_rows = [
         ["Mean Log-Lik.", "-9979.09", "-9979.42", "-9972.73"],
         ["logmeanexp (pomp)", "-9962.88", "-9975.17", "-9972.73*"],
-        ["Single-Run Std", "9.11", "4.16", "—"],
+        ["Single-Run Std", "9.11", "4.16", "--"],
         ["SE / Jackknife SE", "2.88 / 6.24", "1.32 / 1.12", "0.65 (12 runs)"],
-        ["Mean / Min ESS", "404.2 / 2.1", "476.3 / 1.8", "—"],
+        ["Mean / Min ESS", "404.2 / 2.1", "476.3 / 1.8", "--"],
     ]
     add_styled_table(
         slide,
@@ -1559,7 +1559,7 @@ def build_slide_14_if2_setup(prs: Presentation) -> None:
     bullets = [
         (
             "Plug-and-Play MLE:",
-            "Estimates all 30 ChMSV parameters via forward simulation and density evaluation—no MCMC or priors required.",
+            "Estimates all 30 ChMSV parameters via forward simulation and density evaluation; no MCMC or priors required.",
         ),
         (
             "Random-Walk Perturbations:",
@@ -1618,7 +1618,7 @@ def build_slide_14_if2_setup(prs: Presentation) -> None:
         top=cy + CARD_PAD_TOP,
         width=iw,
         height=CARD_TITLE_H,
-        text="IF2 Pipeline (src/estimation.py)",
+        text="IF2 Estimation Pipeline",
         font_size=14.5,
         bold=True,
         color=SLATE_MUTED,
@@ -1689,10 +1689,10 @@ def build_slide_15_if2_results(prs: Presentation) -> None:
     )
     t3_headers = ["Param Group", "Mean Error (ME)", "RMSE", "Paper ME Range"]
     t3_rows = [
-        ["Log-Vol (μ_{i})", "—", "—", "-0.23 .. 0.17"],
-        ["Log-Vol (φ_{i})", "—", "—", "-0.02 .. 0.08"],
-        ["Log-Vol (σ_{ηi})", "—", "—", "-0.05 .. 0.10"],
-        ["Cholesky (μ, φ, σ)", "—", "—", "-0.19 .. 0.16"],
+        ["Log-Vol (μ_{i})", "--", "--", "-0.23 .. 0.17"],
+        ["Log-Vol (φ_{i})", "--", "--", "-0.02 .. 0.08"],
+        ["Log-Vol (σ_{ηi})", "--", "--", "-0.05 .. 0.10"],
+        ["Cholesky (μ, φ, σ)", "--", "--", "-0.19 .. 0.16"],
     ]
     add_styled_table(
         slide,
@@ -1716,7 +1716,7 @@ def build_slide_15_if2_results(prs: Presentation) -> None:
         height=1.70,
         title="Real 4-Asset IF2 Estimates vs. Table 2",
         items=[
-            ("Estimated Log-Likelihood:", "— (Paper Table 2: -9972.73 ± 0.65)."),
+            ("Estimated Log-Likelihood:", "-- (Paper Table 2: -9972.73 ± 0.65)."),
             ("Parameter Concordance:", "Numerical Hessian SEs and comparison across 30 parameters."),
         ],
         title_size=13.5,
@@ -1772,7 +1772,7 @@ def build_slide_16_bayesian_pmcmc(prs: Presentation) -> None:
         top=cy + CARD_PAD_TOP,
         width=iw,
         height=CARD_TITLE_H,
-        text="Bayesian Setup (src/estimation.py)",
+        text="Bayesian Estimation Setup",
         font_size=14.0,
         bold=True,
         color=SLATE_MUTED,
@@ -1812,8 +1812,8 @@ def build_slide_16_bayesian_pmcmc(prs: Presentation) -> None:
     )
     p4_headers = ["Dataset", "Sampler", "95% Cred. Int.", "R-hat / ESS"]
     p4_rows = [
-        ["Simulated 2-Asset (p=2)", "PMMH / SMC^{2}", "—", "—"],
-        ["Real 4-Asset (p=4)", "PMMH / SMC^{2}", "—", "—"],
+        ["Simulated 2-Asset (p=2)", "PMMH / SMC^{2}", "--", "--"],
+        ["Real 4-Asset (p=4)", "PMMH / SMC^{2}", "--", "--"],
     ]
     add_styled_table(
         slide,
@@ -1987,7 +1987,7 @@ def build_slide_19_conclusion(prs: Presentation) -> None:
             False,
         ),
         (
-            "Phase III (Iterated Filtering — IF2):",
+            "Phase III (Iterated Filtering, IF2):",
             "Simulated Table 3 ME/RMSE parameter recovery benchmark and real 4-asset MLE estimates.",
             True,
         ),
@@ -2033,25 +2033,25 @@ def build_slide_20_questions(prs: Presentation) -> None:
         (
             "GH",
             "Gabriel\nHimmelein",
-            "Data & Base ChMSV Model\nsrc/base_model.py\nStooq Alignment & Table 1\nSynthetic Benchmarks",
+            "Data & Base ChMSV Model\nStooq Alignment & Table 1\nStateSpaceModel Setup\nSynthetic Benchmarks",
             False,
         ),
         (
             "MS",
             "Maria-Giulia\nSalvarani",
-            "Bootstrap Particle Filter\nsrc/filtering.py\nCLT & Table 2 Verification\nFigures 2–4 & ESS",
+            "Bootstrap Particle Filter\nFeynman–Kac Tracking\nCLT & Table 2 Verification\nFigures 2–4 & ESS",
             False,
         ),
         (
             "TP",
             "Tomàs Planelles\nAlonso",
-            "Iterated Filtering (IF2)\nsrc/estimation.py\nTable 3 ME/RMSE Recovery\nTable 2 Real 4-Asset MLE",
+            "Iterated Filtering (IF2)\nGeometric Cooling (α = 0.5)\nTable 3 ME/RMSE Recovery\nTable 2 Real 4-Asset MLE",
             True,
         ),
         (
             "MM",
             "Matteo\nMola",
-            "Bayesian PMCMC / SMC^{2}\nsrc/estimation.py\nStructDist Priors\nPosteriors vs. IF2",
+            "Bayesian PMCMC / SMC^{2}\nStationary AR(1) Priors\nMulti-Chain Posteriors\nComparison vs. IF2",
             True,
         ),
     ]
