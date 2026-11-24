@@ -1031,19 +1031,19 @@ def build_slide_07_chmsv_model(prs: Presentation) -> None:
 
     add_textbox(
         slide, left=ix_l, top=CONTENT_TOP + CARD_PAD_TOP, width=iw_l, height=0.28,
-        text="1. Observation & Covariance Factorization (Eqs. 1, 3)", font_size=12.5, bold=True, color=NAVY
+        text="1. Observation & Covariance Factorization", font_size=12.5, bold=True, color=NAVY
     )
     add_picture_fit(slide, ASSETS_DIR / "eq_chmsv_obs.png", left=ix_l, top=CONTENT_TOP + 0.52, max_w=iw_l, max_h=0.52)
 
     add_textbox(
         slide, left=ix_l, top=CONTENT_TOP + 1.24, width=iw_l, height=0.28,
-        text="2. Independent Mean-Reverting AR(1) Latent States (Eqs. 8–11)", font_size=12.5, bold=True, color=NAVY
+        text="2. Independent Mean-Reverting AR(1) Latent States", font_size=12.5, bold=True, color=NAVY
     )
     add_picture_fit(slide, ASSETS_DIR / "eq_chmsv_ar1.png", left=ix_l, top=CONTENT_TOP + 1.56, max_w=iw_l, max_h=0.52)
 
     add_textbox(
         slide, left=ix_l, top=CONTENT_TOP + 2.28, width=iw_l, height=0.28,
-        text="3. Conditional Volatilities & Dynamic Correlations (Eqs. 6–7)", font_size=12.5, bold=True, color=NAVY
+        text="3. Conditional Volatilities & Dynamic Correlations", font_size=12.5, bold=True, color=NAVY
     )
     add_picture_fit(slide, ASSETS_DIR / "eq_chmsv_corr.png", left=ix_l, top=CONTENT_TOP + 2.60, max_w=iw_l, max_h=0.78)
 
@@ -1115,7 +1115,7 @@ def build_slide_07_chmsv_model(prs: Presentation) -> None:
         top=y_curr,
         width=iw,
         height=(cy + ch - CARD_PAD_BOTTOM) - y_curr,
-        title="4. State-to-Finance Transforms (Eqs. 4–7)",
+        title="4. State-to-Finance Transforms",
         subtitle="Reconstruct Σ_{t}  →  conditional stdev & dynamic correlations",
         dark=True,
     )
@@ -1203,7 +1203,7 @@ def build_slide_08_simulated_benchmarks(prs: Presentation) -> None:
         top=5.94,
         width=7.07,
         height=0.58,
-        text="Ground-truth simulated volatilities (Eq. 6) and dynamic correlations (Eq. 7) for 4-asset (top, T = 1,258) and 2-asset (bottom, T = 500) datasets.",
+        text="Ground-truth simulated volatilities and dynamic correlations for 4-asset (top, T = 1,258) and 2-asset (bottom, T = 500) datasets.",
         font_size=11.5,
         italic=True,
         color=TEXT_MUTED,
@@ -1397,7 +1397,7 @@ def build_slide_11_fig2_volatilities(prs: Presentation) -> None:
         top=CONTENT_TOP,
         width=5.35,
         height=3.74,
-        title="Volatility Findings (Eq. 6, N = 1,000)",
+        title="Volatility Findings (N = 1,000)",
         items=[
             (
                 "S&P 500 (SPX):",
@@ -1457,7 +1457,7 @@ def build_slide_12_fig3_spx_corr(prs: Presentation) -> None:
         top=CONTENT_TOP,
         width=4.71,
         height=3.30,
-        title="SPX Pairwise Correlations (Eq. 7)",
+        title="SPX Pairwise Correlations",
         items=[
             (
                 "Strictly Positive:",
@@ -1911,7 +1911,7 @@ def build_slide_18_discussion(prs: Presentation) -> None:
     items = [
         (
             "1. Interpretability of Cholesky Latent States",
-            "Raw AR(1) parameters (μ_{ij}, φ_{ij}, σ_{ij}) of q_{ij,t} mix variances and covariances; interpretable volatilities and correlations require reconstructing Σ_{t} = L_{t}V_{t}L_{t}^{T} via Eqs. 4–7.",
+            "Raw AR(1) parameters (μ_{ij}, φ_{ij}, σ_{ij}) of q_{ij,t} mix variances and covariances; interpretable volatilities and correlations require reconstructing Σ_{t} = L_{t}V_{t}L_{t}^{T}.",
             False,
         ),
         (

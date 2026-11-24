@@ -312,7 +312,7 @@ def plot_figure2_volatilities(
             stdev_filtered[:, i],
             color=colors[i],
             lw=1.1,
-            label=f"{asset_names[i]} Filtered Stdev (Eq. 6)",
+            label=f"{asset_names[i]} Filtered Stdev",
         )
 
         if stdev_q05 is not None and stdev_q95 is not None:
@@ -382,7 +382,7 @@ def plot_figure3_spx_correlations(
             corr_filtered[:, pair_idx],
             color=color,
             lw=1.2,
-            label=r"Estimated $\rho_{1j,t}$ (Eq. 7)",
+            label=r"Estimated $\rho_{1j,t}$",
         )
 
         if corr_q05 is not None and corr_q95 is not None:
@@ -459,7 +459,7 @@ def plot_figure4_candidate_correlations(
             corr_filtered[:, pair_idx],
             color=color,
             lw=1.2,
-            label=r"Estimated $\rho_{ij,t}$ (Eq. 7)",
+            label=r"Estimated $\rho_{ij,t}$",
         )
 
         if corr_q05 is not None and corr_q95 is not None:

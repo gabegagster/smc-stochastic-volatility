@@ -1150,7 +1150,7 @@ def plot_simulated_datasets_overview(
     t4 = np.arange(sim4["T"])
     for i, name in enumerate(sim4["asset_names"]):
         ax00.plot(t4, sim4["stdev_true"][:, i], lw=1.0, label=f"{name} $\\sqrt{{\\Sigma_{{t,{i+1}{i+1}}}}}$")
-    ax00.set_title("4-Asset Simulated Ground-Truth Volatilities (Eq. 6, $T=1258$)", fontsize=10, fontweight="bold")
+    ax00.set_title("4-Asset Simulated Ground-Truth Volatilities ($T=1258$)", fontsize=10, fontweight="bold")
     ax00.set_ylabel("Stdev $(y_{i,t} \\mid \\mathcal{F}_{t-1})$")
     ax00.legend(loc="upper right", fontsize=8)
     ax00.grid(True, alpha=0.25)
@@ -1167,7 +1167,7 @@ def plot_simulated_datasets_overview(
     ]
     for k, label in enumerate(pair_labels_4):
         ax01.plot(t4, sim4["corr_true"][:, k], lw=0.9, label=label)
-    ax01.set_title("4-Asset Simulated Ground-Truth Dynamic Correlations (Eq. 7)", fontsize=10, fontweight="bold")
+    ax01.set_title("4-Asset Simulated Ground-Truth Dynamic Correlations", fontsize=10, fontweight="bold")
     ax01.set_ylabel("Correlation $\\rho_{ij,t}$")
     ax01.legend(loc="lower right", fontsize=7.5, ncol=2)
     ax01.grid(True, alpha=0.25)
